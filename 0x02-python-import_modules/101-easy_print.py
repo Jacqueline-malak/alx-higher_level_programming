@@ -1,2 +1,4 @@
 #!/usr/bin/python3
-import py_print
+import builtins
+
+builtins.print("#pythoniscool")
