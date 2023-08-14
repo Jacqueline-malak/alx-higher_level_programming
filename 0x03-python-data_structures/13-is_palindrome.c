@@ -1,35 +1,54 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "lists.h"
-
 /**
- * main - check the code for
- *
- * Return: Always 0.
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
  */
-int main(void)
-{
-    listint_t *head;
-
-    head = NULL;
-    add_nodeint_end(&head, 1);
-    add_nodeint_end(&head, 17);
-    add_nodeint_end(&head, 972);
-    add_nodeint_end(&head, 50);
-    add_nodeint_end(&head, 98);
-    add_nodeint_end(&head, 98);
-    add_nodeint_end(&head, 50);
-    add_nodeint_end(&head, 972);
-    add_nodeint_end(&head, 17);
-    add_nodeint_end(&head, 1);
-    print_listint(head);
-
-    if (is_palindrome(&head) == 1)
-        printf("Linked list is a palindrome\n");
-    else
-        printf("Linked list is not a palindrome\n");
-
-    free_listint(head);
-
-    return (0);
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if(head == null || head.next == null)
+            return true;
+        
+        ListNode p1 = clone(head);
+        ListNode p2 = reverse(head);
+        while(p1 != null) {
+            if(p1.val != p2.val)
+                return false;
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+        return true;
+    }
+    
+    private ListNode clone(ListNode head) {
+        ListNode cloneHead = null;
+        ListNode prev = null;
+        ListNode current = head;
+        while(current != null) {
+            ListNode listnode = new ListNode(current.val);
+            if(cloneHead == null) {
+                cloneHead = listnode;
+            }
+            if(prev != null) {
+                prev.next = listnode;
+            }
+            prev = listnode;
+            current = current.next;
+        }
+        return cloneHead;
+    }
+    
+    private ListNode reverse(ListNode head) {
+        ListNode current = head;
+        ListNode prev = null;
+        while(current != null) {
+            ListNode tmp = current.next;
+            current.next = prev;
+            prev = current;
+            current = tmp;
+        }
+        return prev;
+    }
 }
