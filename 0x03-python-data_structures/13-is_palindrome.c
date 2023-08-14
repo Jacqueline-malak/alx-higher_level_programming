@@ -1,54 +1,18 @@
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; }
- * }
- */
-class Solution {
-    public boolean isPalindrome(ListNode head) {
-        if(head == null || head.next == null)
-            return true;
-        
-        ListNode p1 = clone(head);
-        ListNode p2 = reverse(head);
-        while(p1 != null) {
-            if(p1.val != p2.val)
-                return false;
-            p1 = p1.next;
-            p2 = p2.next;
-        }
-        return true;
-    }
-    
-    private ListNode clone(ListNode head) {
-        ListNode cloneHead = null;
-        ListNode prev = null;
-        ListNode current = head;
-        while(current != null) {
-            ListNode listnode = new ListNode(current.val);
-            if(cloneHead == null) {
-                cloneHead = listnode;
-            }
-            if(prev != null) {
-                prev.next = listnode;
-            }
-            prev = listnode;
-            current = current.next;
-        }
-        return cloneHead;
-    }
-    
-    private ListNode reverse(ListNode head) {
-        ListNode current = head;
-        ListNode prev = null;
-        while(current != null) {
-            ListNode tmp = current.next;
-            current.next = prev;
-            prev = current;
-            current = tmp;
-        }
-        return prev;
-    }
-}
+#ifndef LISTS_H
+#define LISTS_H
+
+#include <stdlib.h>
+
+typedef struct listint_s
+{
+	int n;
+	struct listint_s *next;
+} listint_t;
+
+size_t print_listint(const listint_t *h);
+listint_t *add_nodeint_end(listint_t **head, const int n);
+void free_listint(listint_t *head);
+
+int is_palindrome(listint_t **head);
+
+#endif /* LISTS_H */
