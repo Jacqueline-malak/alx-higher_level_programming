@@ -1,8 +1,9 @@
 #!/usr/bin/python3
-"""A script tha:
-- takes in a letter
-- sends POST request to http://0.0.0.0:5000/search_user
+"""takes in a letter and
+sends a POST request to http://0.0.0.0:5000/search_user
 with the letter as a parameter.
+The letter must be sent in the variable q
+If no argument is given, set q=""
 """
 import sys
 import requests
